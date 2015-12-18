@@ -10,9 +10,12 @@
 ##Inserir instalação LibreOffice 4.4 pt-BR
 ##TESTAR "--pending" "; -B, --auto-deconfigure"; "--force-configure-any"; "--force-depends" NO "DPKG"
 ## USAR "which" para ver se o programa esta instalado
+apt-get -y update && clear
 while true; do
 SUCESSO='echo --------------------- Procedimento realizado com sucesso! ---------------------'
-echo
+echo    "###########################"
+echo     "      Hostname: " && sudo cat /etc/hostname
+echo    "###########################"
 echo	" 1) Instalar Java"
 echo	" 2) Instalar Openssh-server"
 echo    " 3) Instalar SNMP"
@@ -22,8 +25,8 @@ echo    " 6) Instalar KRDC"
 echo    " 7) LibreOffice Pt-BR"
 echo    " 8) Corrigir Repositório"
 echo    " 9) Pacotes Quebrados"
-echo    "10) Update & Upgrade"
-echo    "11) Autoremove"
+echo    "10) Upgrade & Autoremove"
+echo    "11) ## A defirnir (GRUB)##"
 echo	"12) Remover Convidado"
 echo    "13) Nova versão Ubuntu"
 echo    "14) Reiniciar / Desligar"
@@ -61,13 +64,11 @@ esac
 ;;
 
 "2" )	#OpenSSH-server
-	apt-get -y update
 	apt-get install -y openssh-server
 	$SUCESSO
 ;;
 
 "3" )	#SNMP
-	apt-get -y update
 	apt-get install -y snmp snmpd
 	cd /etc/snmp/
 	mv snmpd.conf snmpd.conf.original
@@ -77,7 +78,6 @@ esac
 ;;
 
 "4" )	#Flash Player
-	apt-get update
 	apt-get install -y flashplugin-installer
 	$SUCESSO
 ;;
@@ -104,7 +104,6 @@ esac
 ;;
 
 "6")	#KRDC
-	apt-get update
 	apt-get install -y krdc
 	$SUCESSO
 ;;
@@ -201,13 +200,13 @@ esac
 ;;
 
 "10" )	#Update & Upgrade
-	apt-get -y update
 	apt-get -y upgrade
+	apt-get -y autoremove
 	$SUCESSO
 ;;
 
 "11" )	#Autoremove
-	apt-get -y autoremove
+	echo "A definir!"
 	$SUCESSO
 ;;
 
