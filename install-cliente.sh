@@ -19,7 +19,7 @@ echo    " 3) Instalar SNMP"
 echo    " 4) Instalar Flash Player"
 echo    " 5) Instalar Google Chrome"
 echo    " 6) Instalar KRDC"
-echo    " 7) LibreOffice Pt-BR (INTERMINADO!)"
+echo    " 7) LibreOffice Pt-BR"
 echo    " 8) Corrigir Repositório"
 echo    " 9) Pacotes Quebrados"
 echo    "10) Update & Upgrade"
@@ -60,13 +60,13 @@ read Menu
 esac
 ;;
 
-"2" )
+"2" )	#OpenSSH-server
 	apt-get -y update
 	apt-get install -y openssh-server
 	$SUCESSO
 ;;
 
-"3" )
+"3" )	#SNMP
 	apt-get -y update
 	apt-get install -y snmp snmpd
 	cd /etc/snmp/
@@ -76,13 +76,13 @@ esac
 	$SUCESSO
 ;;
 
-"4" )
+"4" )	#Flash Player
 	apt-get update
 	apt-get install -y flashplugin-installer
 	$SUCESSO
 ;;
 
-"5" )
+"5" )	#Chrome
    case $(uname -m) in
 	"x86_64")
 		apt-get install -y libxss1
@@ -103,13 +103,14 @@ esac
 esac
 ;;
 
-"6")
+"6")	#KRDC
 	apt-get update
 	apt-get install -y krdc
 	$SUCESSO
 ;;
 
-"7")
+"7")	#LibreOffice
+	sudo add-apt-repository -y ppa:libreoffice/ppa && sudo apt-get update && sudo apt-get dist-upgrade -y
 #   case $(which libreoffice) in
 #	"/usr/bin/libreoffice") ##ENCONTRAR OS LUGARES DE INSTALAÇÃO DO LIBREOFFICE
 #		apt-get -y --no-install-recommends --no-install-suggests remove libreoffice*
@@ -119,43 +120,43 @@ esac
 #		rm -rf /*libreoffice* *LibreOffice*
 #		rmdir --ignore-fail-on-non-empty /*libreoffice* *LibreOffice*
 
-   case $(uname -m) in
-	"x86_64")
-		wget -dc --progress=bar http://download.documentfoundation.org/libreoffice/stable/4.4.6/deb/x86_64/LibreOffice_4.4.6_Linux_x86-64_deb_langpack_pt-BR.tar.gz
-		wget -dc --progress=bar http://download.documentfoundation.org/libreoffice/stable/4.4.6/deb/x86_64/LibreOffice_4.4.6_Linux_x86-64_deb_helppack_pt-BR.tar.gz
-		wget -dc --progress=bar http://download.documentfoundation.org/libreoffice/stable/4.4.6/deb/x86_64/LibreOffice_4.4.6_Linux_x86-64_deb.tar.gz
-		for x in ls LibreOffice*; do tar -xzvf $x;done
-##		tar -zxvf LibreOffice*
-		cd LibreOffice_4.4.6.3_Linux_x86-64_deb/DEBS/
-		dpkg -i *.deb
-		cd ../../LibreOffice_4.4.6.3_Linux_x86-64_deb_langpack_pt-BR/DEBS/
-		dpkg -i --force-all *.deb
-		cd ../../LibreOffice_4.4.6.3_Linux_x86-64_deb_helppack_pt-BR/DEBS/
-		dpkg -i --force-all *.deb
-		apt-get -fy install
-		cd ../../
-		rm -rf LibreOffice*
-		$SUCESSO
-;;
-	"i686")
-               wget -dc --progress=bar http://download.documentfoundation.org/libreoffice/stable/4.4.6/deb/x86/LibreOffice_4.4.6_Linux_x86_deb_langpack_pt-BR.tar.gz
-               wget -dc --progress=bar http://download.documentfoundation.org/libreoffice/stable/4.4.6/deb/x86/LibreOffice_4.4.6_Linux_x86_deb_helppack_pt-BR.tar.gz
-               wget -dc --progress=bar http://download.documentfoundation.org/libreoffice/stable/4.4.6/deb/x86/LibreOffice_4.4.6_Linux_x86_deb.tar.gz
-		for x in ls LibreOffice*; do tar -xzvf $x;done
-##		tar -zxvf LibreOffice*
-               cd LibreOffice_4.4.6.3_Linux_x86_deb/DEBS/
-               dpkg -i *.deb
-               cd ../../LibreOffice_4.4.6.3_Linux_x86_deb_langpack_pt-BR/DEBS/
-               dpkg -i --force-all *.deb
-               cd ../../LibreOffice_4.4.6.3_Linux_x86_deb_helppack_pt-BR/DEBS/
-               dpkg -i --force-all *.deb
-               apt-get -fy install
-               cd ../../
-               rm -rf LibreOffice*
-               $SUCESSO
-;;
-esac
-;;
+#    case $(uname -m) in
+# 	"x86_64")
+# 		wget -dc --progress=bar http://download.documentfoundation.org/libreoffice/stable/4.4.6/deb/x86_64/LibreOffice_4.4.6_Linux_x86-64_deb_langpack_pt-BR.tar.gz
+# 		wget -dc --progress=bar http://download.documentfoundation.org/libreoffice/stable/4.4.6/deb/x86_64/LibreOffice_4.4.6_Linux_x86-64_deb_helppack_pt-BR.tar.gz
+# 		wget -dc --progress=bar http://download.documentfoundation.org/libreoffice/stable/4.4.6/deb/x86_64/LibreOffice_4.4.6_Linux_x86-64_deb.tar.gz
+# 		for x in ls LibreOffice*; do tar -xzvf $x;done
+# ##		tar -zxvf LibreOffice*
+# 		cd LibreOffice_4.4.6.3_Linux_x86-64_deb/DEBS/
+# 		dpkg -i *.deb
+# 		cd ../../LibreOffice_4.4.6.3_Linux_x86-64_deb_langpack_pt-BR/DEBS/
+# 		dpkg -i --force-all *.deb
+# 		cd ../../LibreOffice_4.4.6.3_Linux_x86-64_deb_helppack_pt-BR/DEBS/
+# 		dpkg -i --force-all *.deb
+# 		apt-get -fy install
+# 		cd ../../
+# 		rm -rf LibreOffice*
+# 		$SUCESSO
+# ;;
+# 	"i686")
+#               wget -dc --progress=bar http://download.documentfoundation.org/libreoffice/stable/4.4.6/deb/x86/LibreOffice_4.4.6_Linux_x86_deb_langpack_pt-BR.tar.gz
+#               wget -dc --progress=bar http://download.documentfoundation.org/libreoffice/stable/4.4.6/deb/x86/LibreOffice_4.4.6_Linux_x86_deb_helppack_pt-BR.tar.gz
+#               wget -dc --progress=bar http://download.documentfoundation.org/libreoffice/stable/4.4.6/deb/x86/LibreOffice_4.4.6_Linux_x86_deb.tar.gz
+# 		for x in ls LibreOffice*; do tar -xzvf $x;done
+# ##		tar -zxvf LibreOffice*
+#               cd LibreOffice_4.4.6.3_Linux_x86_deb/DEBS/
+#               dpkg -i *.deb
+#               cd ../../LibreOffice_4.4.6.3_Linux_x86_deb_langpack_pt-BR/DEBS/
+#               dpkg -i --force-all *.deb
+#               cd ../../LibreOffice_4.4.6.3_Linux_x86_deb_helppack_pt-BR/DEBS/
+#               dpkg -i --force-all *.deb
+#               apt-get -fy install
+#               cd ../../
+#               rm -rf LibreOffice*
+#               $SUCESSO
+# ;;
+# esac
+# ;;
 
 #"Instalar Impressoras" )
 #		zenity --width=400 --height=380 --list --column "Impressoras" --column "Modelo" --title="Instalador de Impressoras" \
@@ -186,31 +187,31 @@ esac
 #esac
 #;;
 
-"8" )
+"8" )	#Corrigir repositório
 	rm -rf /var/lib/apt/lists/*
 	apt-get -y update
 	$SUCESSO
 ;;
 
-"9" )
+"9" )	#Pacotes quebrados
 	dpkg --configure -a
 	apt-get install -f
 	apt-get -y dist-upgrade
 	$SUCESSO
 ;;
 
-"10" )
+"10" )	#Update & Upgrade
 	apt-get -y update
 	apt-get -y upgrade
 	$SUCESSO
 ;;
 
-"11" )
+"11" )	#Autoremove
 	apt-get -y autoremove
 	$SUCESSO
 ;;
 
-"12" )
+"12" )	#Remover convidado
 	case $(lsb_release -sr) in
 	"12.*")
 		echo -e "allow-guest=false" >> /etc/lighdm/lightdm.conf
@@ -218,17 +219,18 @@ esac
 ;;
 	"14.*")
 		echo -e "allow-guest=false" >> /etc/lighdm/lightdm.conf
+		echo -e "allow-guest=false" >> /etc/lighdm/users.conf
 		echo -e "allow-guest=false" >> /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf
 		$SUCESSO
 ;;
 esac
 ;;
 
-"13" )
+"13" )	#Nova versão do Ubuntu
         do-release-upgrade
 ;;
 
-"14" )
+"14" )	#Reiniciar/Desligar
 	echo -e "Você deseja Desligar[d] ou Reiniciar[r]?"
 	read opcao
 	case $opcao in
@@ -243,7 +245,7 @@ esac
 esac
 ;;
 
-*)
+*)	#Sair
 	break
 	exit
 ;;
