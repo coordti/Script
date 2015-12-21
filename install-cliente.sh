@@ -110,6 +110,7 @@ esac
 
 "7")	#LibreOffice
 	sudo add-apt-repository -y ppa:libreoffice/ppa && sudo apt-get update && sudo apt-get dist-upgrade -y
+;;	
 #   case $(which libreoffice) in
 #	"/usr/bin/libreoffice") ##ENCONTRAR OS LUGARES DE INSTALAÇÃO DO LIBREOFFICE
 #		apt-get -y --no-install-recommends --no-install-suggests remove libreoffice*
