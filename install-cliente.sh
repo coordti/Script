@@ -40,6 +40,7 @@ read Menu
   case $Menu in
 
 "1" ) #JAVA v8.0_66
+function java () {	
 	sudo cd /usr/
 	sudo rm -rf jre*
 	sudo rm -rf /usr/lib/firefox-addons/plugins/libnpjp2*
@@ -68,7 +69,7 @@ read Menu
 ;;
 esac
 ;;
-
+}
 "2" )	#OpenSSH-server
 	sudo apt-get install -y openssh-server
 	$SUCESSO
