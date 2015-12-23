@@ -16,7 +16,7 @@ apt-get -y update && clear
 while true; do
 SUCESSO='echo --------------------- Procedimento realizado com sucesso! ---------------------'
 echo    "###########################"
-echo     "      Hostname: " && sudo cat /etc/hostname
+echo -n "      Hostname: " && sudo cat /etc/hostname
 echo    "###########################"
 echo	" 1) Instalar Java"
 echo	" 2) Instalar Openssh-server"
