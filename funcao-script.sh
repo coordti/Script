@@ -11,13 +11,15 @@
 ##TESTAR "--pending" "; -B, --auto-deconfigure"; "--force-configure-any"; "--force-depends" NO "DPKG"
 ## USAR "which" para ver se o programa esta instalado
 
-function java () {	
+#function java () {	
+java() {
 	sudo cd /usr/
 	sudo rm -rf jre*
 	sudo rm -rf /usr/lib/firefox-addons/plugins/libnpjp2*
 	sudo rm -rf AutoDL?BundleId*
 
-	if [uname -m == x86_64]; then
+	case (uname -m) in 
+	"x86_64")
 		wget -dc --progress=dot http://javadl.sun.com/webapps/download/AutoDL?BundleId=111741;
 		tar -zxvf  AutoDL?BundleId=111741
 		sudo ln -s /usr/jre1.8.0_66/lib/amd64/libnpjp2.so  /usr/lib/firefox-addons/plugins/
@@ -25,7 +27,8 @@ function java () {
 		java -version
 		sleep 2
 		$SUCESSO
-	elif [uname -m == i686]; then
+	;;
+	"i686")
 		wget -dc --progress=dot http://javadl.sun.com/webapps/download/AutoDL?BundleId=111739;
 		tar -zxvf  AutoDL?BundleId=111739
 		sudo ln -s /usr/jre1.8.0_66/lib/i386/libnpjp2.so  /usr/lib/firefox-addons/plugins/
@@ -33,7 +36,8 @@ function java () {
 		java -version
 		sleep 2
 		$SUCESSO
-	fi
+	;;
+	esac
 }
 
 function openssh () { 
