@@ -11,8 +11,7 @@
 ##TESTAR "--pending" "; -B, --auto-deconfigure"; "--force-configure-any"; "--force-depends" NO "DPKG"
 ## USAR "which" para ver se o programa esta instalado
 
-#function java () {	
-java() {
+	java() {
 	sudo cd /usr/
 	sudo rm -rf jre*
 	sudo rm -rf /usr/lib/firefox-addons/plugins/libnpjp2*
@@ -40,12 +39,12 @@ java() {
 	esac
 }
 
-function openssh () { 
+	openssh() {
 	sudo apt-get install -y openssh-server
 	$SUCESSO
 }
 
-function snmp () {
+	snmp() {
 	sudo apt-get install -y snmp snmpd
 	sudo cd /etc/snmp/
 	sudo mv snmpd.conf snmpd.conf.original
@@ -54,63 +53,66 @@ function snmp () {
 	$SUCESSO
 }
 
-function flashplayer () {
+	flashplayer() {
 	sudo apt-get install -y flashplugin-installer
 	$SUCESSO
 }
 
-function chrome () {
-	if [uname -m == "x86_64"]; then
+	chrome() {
+	case (uname -m) in
+	"x86_64")
 		sudo apt-get install -y libxss1
 		wget -dc --progress=dot https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 		sudo dpkg -i google-chrome-stable_current_amd64.deb
 		sudo apt-get -fy install
 		rm -rf google-chrome*
 		$SUCESSO
-	elfi [uname -m == "i686"]; then
+	;;
+	"i686")
 		sudo apt-get install -y libxss1
 		wget -dc --progress=dot https://dl.google.com/linux/direct/google-chrome-stable_current_i386.deb
 		sudo dpkg -i google-chrome-stable_current_i386.deb
 		sudo apt-get -fy install
 		rm -rf google-chrome*
 		$SUCESSO
-	fi
+	;;
+	esac
 }
 
-function krdc () {
+	krdc() {
 	sudo apt-get install -y krdc
 	$SUCESSO
 }
 
-function libreoffice () {
+	libreoffice() {
 	sudo add-apt-repository -y ppa:libreoffice/ppa && sudo apt-get update && sudo apt-get -y dist-upgrade
 }
 
-function repositorio () {
+	repositorio() {
 	sudo rm -rf /var/lib/apt/lists/*
 	sudo apt-get -y update
 	$SUCESSO
 }
 
-function pacotes () {
+	pacotes() {
 	sudo dpkg --configure -a
 	sudoapt-get install -f
 	sudo apt-get -y dist-upgrade
 	$SUCESSO
 }
 
-function updupg() {
+	updupg() {
 	sudo apt-get -y upgrade
 	sudo apt-get -y autoremove
 	$SUCESSO
 }
 
-function autoremove () {
+	autoremove() {
 	echo "A definir!"
 	$SUCESSO
 }
 
-function convidado () {
+	convidado() {
 	case $(lsb_release -sr) in
 	"12.*")
 		sudo echo -e "allow-guest=false" >> /etc/lighdm/lightdm.conf
@@ -121,13 +123,15 @@ function convidado () {
 		sudo echo -e "allow-guest=false" >> /etc/lighdm/users.conf
 		sudo echo -e "allow-guest=false" >> /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf
 		$SUCESSO
+;;
+esac
 }
 
-function novaversao () {
+	novaversao() {
         do-release-upgrade
 }
 
-function desliga() {
+	desliga() {
 	echo -e "Você deseja Desligar[d] ou Reiniciar[r]?"
 	read opcao
 	case $opcao in
@@ -138,6 +142,8 @@ function desliga() {
 	"r")
 		echo -e "O computador será reiniciado!"
 		sudo reboot
+;;
+esac
 }
 
 ####-------------------------------------------MENU-------------------------------------------####
