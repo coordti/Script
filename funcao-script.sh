@@ -17,8 +17,7 @@ function java () {
 	sudo rm -rf /usr/lib/firefox-addons/plugins/libnpjp2*
 	sudo rm -rf AutoDL?BundleId*
 
-	case $(uname -m) in
-	"x86_64")
+	if [uname -m == x86_64]; then
 		wget -dc --progress=dot http://javadl.sun.com/webapps/download/AutoDL?BundleId=111741;
 		tar -zxvf  AutoDL?BundleId=111741
 		sudo ln -s /usr/jre1.8.0_66/lib/amd64/libnpjp2.so  /usr/lib/firefox-addons/plugins/
@@ -26,8 +25,7 @@ function java () {
 		java -version
 		sleep 2
 		$SUCESSO
-;;
-	"i686")
+	elif [uname -m == i686]; then
 		wget -dc --progress=dot http://javadl.sun.com/webapps/download/AutoDL?BundleId=111739;
 		tar -zxvf  AutoDL?BundleId=111739
 		sudo ln -s /usr/jre1.8.0_66/lib/i386/libnpjp2.so  /usr/lib/firefox-addons/plugins/
@@ -35,6 +33,7 @@ function java () {
 		java -version
 		sleep 2
 		$SUCESSO
+	fi
 }
 
 function openssh () { 
@@ -46,33 +45,32 @@ function snmp () {
 	sudo apt-get install -y snmp snmpd
 	sudo cd /etc/snmp/
 	sudo mv snmpd.conf snmpd.conf.original
-	echo -e "rocommunity public \nsyslocation 'IFCE Ubajara' \nsyscontact @CTI" >> snmpd.conf
+	echo "rocommunity public \nsyslocation 'IFCE Ubajara' \nsyscontact @CTI" >> snmpd.conf
 	sudo /etc/init.d/snmpd restart
 	$SUCESSO
 }
 
-function flashplayer() {
+function flashplayer () {
 	sudo apt-get install -y flashplugin-installer
 	$SUCESSO
 }
 
 function chrome () {
-   case $(uname -m) in
-	"x86_64")
+	if [uname -m == "x86_64"]; then
 		sudo apt-get install -y libxss1
 		wget -dc --progress=dot https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 		sudo dpkg -i google-chrome-stable_current_amd64.deb
 		sudo apt-get -fy install
 		rm -rf google-chrome*
 		$SUCESSO
-;;
-	"i686")
+	elfi [uname -m == "i686"]; then
 		sudo apt-get install -y libxss1
 		wget -dc --progress=dot https://dl.google.com/linux/direct/google-chrome-stable_current_i386.deb
 		sudo dpkg -i google-chrome-stable_current_i386.deb
 		sudo apt-get -fy install
 		rm -rf google-chrome*
 		$SUCESSO
+	fi
 }
 
 function krdc () {
