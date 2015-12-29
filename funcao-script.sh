@@ -168,7 +168,8 @@ echo    "11) ## A defirnir (GRUB)##"
 echo	"12) Remover Convidado"
 echo    "13) Nova versão Ubuntu"
 echo    "14) Reiniciar / Desligar"
-echo    "15) Sair / TESTE"
+echo    "15) Softwares Básicos"
+echo    "16) Sair / TESTE"
 echo
 echo	"Insira sua opção: "
 read Menu
@@ -189,6 +190,7 @@ read Menu
 "12") convidado ;;
 "13") novaversao ;;
 "14") desliga ;;
+"15") updupg; java; openssh; snmp; ;;
 *) exit ;;
 
 esac
