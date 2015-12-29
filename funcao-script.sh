@@ -17,7 +17,7 @@
 	sudo rm -rf /usr/lib/firefox-addons/plugins/libnpjp2*
 	sudo rm -rf AutoDL?BundleId*
 
-	case (uname -m) in 
+	case $(uname -m) in 
 	"x86_64")
 		wget -dc --progress=dot http://javadl.sun.com/webapps/download/AutoDL?BundleId=111741;
 		tar -zxvf  AutoDL?BundleId=111741
@@ -59,7 +59,7 @@
 }
 
 	chrome() {
-	case (uname -m) in
+	case $(uname -m) in
 	"x86_64")
 		sudo apt-get install -y libxss1
 		wget -dc --progress=dot https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
